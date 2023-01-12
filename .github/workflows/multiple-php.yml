@@ -1,0 +1,27 @@
+name: "Nicu php versions check"
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  # Check there is no syntax errors in the project
+  php-linter:
+    name: Nicu check multiple php
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.0.0
+
+      - name: PHP syntax checker 5.6
+        uses: nicumicletest/multiple-php@master
+        with:
+          working-directory: simple-jwt-login/
+          php-version: 5.6
+      - name: PHP syntax checker 7.3
+        uses: nicumicletest/multiple-php@master
+        with:
+          working-directory: simple-jwt-login/
+          php-version: 7.3
