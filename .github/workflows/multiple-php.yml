@@ -11,6 +11,9 @@ jobs:
   php-linter:
     name: Nicu check multiple php
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [5.6, 7.2]
     steps:
       - name: Checkout
         uses: actions/checkout@v2.0.0
@@ -19,9 +22,4 @@ jobs:
         uses: nicumicletest/multiple-php@master
         with:
           working-directory: simple-jwt-login/
-          php-version: 5.6
-      - name: PHP syntax checker 7.3
-        uses: nicumicletest/multiple-php@master
-        with:
-          working-directory: simple-jwt-login/
-          php-version: 7.3
+          php-version: ${{ matrix.version }}
